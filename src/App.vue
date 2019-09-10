@@ -1,18 +1,16 @@
 <template>
-  <div id="app">
+  <div>
     <Header></Header>
-    <trip-list></trip-list>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue';
-import TripList from '@/views/TripList.vue';
 
 export default {
   components: {
-    Header,
-    TripList
+    Header
   },
   // data() {
   //   return {
@@ -39,12 +37,32 @@ export default {
 </script>
 
 <style>
-#app {
+/* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin-top: 60px;
   background-color: #fdfdfd;
+} */
+:root {
+  font-size: 10px;
+}
+
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+  background-color: #fafafa;
+  color: #262626;
+  padding-bottom: 3rem;
+  margin: 0 auto;
+  max-width: 1200px;
+  min-width: 320px;
+  padding: 0 2rem; 
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 </style>
