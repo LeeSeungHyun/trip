@@ -1,25 +1,24 @@
 <template>
-  <div id="container">
-    <form> 
-      <div id="image-preview">
-        <label for="image-upload" id="image-label">Choose File</label>
-        <input type="file" name="image" id="image-upload" accept="image/*" />
-        <img alt="" id="image"/>
+  <form id="container"> 
+    <div id="image-preview">
+      <label for="image-upload" id="image-label">Choose File</label>
+      <input type="file" name="image" id="image-upload" accept="image/*" />
+      <img alt="" id="image"/>
+    </div>
+    <div id="contents">
+      <div>
+        <input type="text" placeholder="Please put the content.." name="idea">
       </div>
-      <div id="contents">
-        <div>
-          <input type="text" placeholder="한 줄 생각" name="idea">
-        </div>
-        <div>
-          <input type="text" placeholder="너의 위치는?" name="location">
-        </div>
-        <div>
-          <button type="button">뒤로가기</button>
-          <button type="submit" id="submit-button">작성하기</button>
-        </div>
+      <div>
+        <input type="text" placeholder="where are you?" name="location">
       </div>
-    </form>
-  </div>
+      <div>
+        <button type="submit" class="styled-button" id="submit-button">
+          <span>Upload</span>
+        </button>
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -53,7 +52,7 @@ export default {
   overflow: hidden;
   background-color: #ffffff;
   color: #fff;
-  display: inline-block;
+  float: left;
 }
 #image-preview input {
   line-height: 130px;
@@ -90,7 +89,14 @@ export default {
 }
 
 #contents {
-  display: inline-block;
+  float: right;
+  /* width: 500px; */
+}
+
+#container::after {
+  display: block;
+  content: "";
+  clear: both;
 }
 
 #back {
@@ -116,7 +122,7 @@ input {
 input[type=text] {
   margin: 4px;
   padding: 0 10px;
-  width: 460px;
+  width: 400px;
   height: 36px;
   color: #5882FA;
   background: white;
@@ -131,7 +137,64 @@ input[type=text]:focus {
 }
 
 #submit-button {
-  margin-right: 20px;
+  margin-right: 10px;
+  padding: 2px;
+  font-size: 17px;
+  color: #000;
+  background: linear-gradient(to right, #fdde5c, #f8ab5e, #f56a62, #a176c8, #759beb, #65beb3, #70db96);
+  border-radius: 10px;
+}
+
+#submit-button > span {
+  display: block;
+  padding: 8px 12px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  outline: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+@media screen and (max-width: 1060px) {
+  #image-preview {
+    width: 360px;
+    height: 360px;
+    margin: 0 auto;
+    float: none;
+  }
+
+  #contents {
+    width: 360px;
+    margin: 0 auto;
+    float: none;
+    padding: 0;
+  }
+
+  input[type=text] {
+    margin: 4px;
+    padding: 0 10px;
+    width: 360px;
+    height: 36px;
+    color: #5882FA;
+    background: white;
+    border: 1px solid #5882FA;
+    border-radius: 4px;  
+  }
+  
+  #contents > div:nth-child(1){
+    margin-top: 30px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -149,8 +212,21 @@ input[type=text]:focus {
   }
 
   #contents {
-    float: none;
+    width: 280px;
     margin: 0 auto;
+    float: none;
+    padding: 0;
+  }
+
+  input[type=text] {
+    margin: 4px;
+    padding: 0 10px;
+    width: 280px;
+    height: 36px;
+    color: #5882FA;
+    background: white;
+    border: 1px solid #5882FA;
+    border-radius: 4px;  
   }
   
   #contents > div:nth-child(1){
