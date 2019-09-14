@@ -4,7 +4,7 @@
       <div class="container">
         <div class="gallery">
           <div class="gallery-item" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt="">
+            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt=""  v-on:click="getDetailTrip">
             <div class="gallery-item-info">
               <ul>
                 <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
@@ -36,19 +36,38 @@
       </div>
     </main>
 
-    <modal name="hello-world">
-      hello, world!
+    <!-- use the modal component, pass in the prop -->
+    <modal v-if="showModal" @close="showModal = false">
+      <!--
+        you can use custom content here to overwrite
+        default content
+      -->
+      <div slot="body">
+        <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt="">
+        <div class="content">
+          <div>아 너무 좋다. 다시 오고 싶네</div>
+          <div>In seoul</div>
+        </div>
+      </div>
     </modal>
   </div>
 </template>
 
 <script>
-// import Header from '@/components/Header.vue';
+import modal from '@/components/Modal.vue';
 
 export default {
   data() {
     return {
       showModal: false
+    }
+  },
+  components: {
+    modal
+  },
+  methods: {
+    getDetailTrip() {
+      this.showModal = true;
     }
   }
 }
@@ -119,5 +138,9 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .content {
+    margin-top: 20px;
   }
 </style>
