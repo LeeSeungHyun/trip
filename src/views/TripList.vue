@@ -3,7 +3,7 @@
     <main>
       <div class="container">
         <div class="gallery">
-          <div class="gallery-item" tabindex="0">
+          <!-- <div class="gallery-item" tabindex="0">
             <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt=""  v-on:click="getDetailTrip">
             <div class="gallery-item-info">
               <ul>
@@ -31,7 +31,18 @@
                 <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
               </ul>
             </div>
-          </div>
+          </div> -->
+
+          <div class="gallery-item" tabindex="0" v-for="(trip, index) in tripLists" :key=index>
+            <img :src="'http://localhost:3000/' + trip.filename" class="gallery-image" alt="" />
+            <div class="gallery-item-info">
+              <ul>
+                <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
+                <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
+              </ul>
+            </div>
+          </div> 
+
         </div>
       </div>
     </main>
@@ -54,12 +65,14 @@
 </template>
 
 <script>
+import { fetchTrips } from '@/api/index.js';
 import modal from '@/components/Modal.vue';
 
 export default {
   data() {
     return {
-      showModal: false
+      showModal: false,
+      tripLists: []
     }
   },
   components: {
@@ -69,6 +82,13 @@ export default {
     getDetailTrip() {
       this.showModal = true;
     }
+  },
+  mounted() {
+    fetchTrips()
+    .then((res) => {
+      this.tripLists = res.data.desks;
+      console.log(this.tripLists);
+    })
   }
 }
 </script>
@@ -95,6 +115,8 @@ export default {
     margin: 1rem;
     color: #fff;
     cursor: pointer;
+    /* width: 500px;
+    height: 500px; */
   }
   /* .gallery-item:hover .gallery-item-info,
   .gallery-item:focus .gallery-item-info {

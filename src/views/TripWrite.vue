@@ -2,18 +2,18 @@
   <form id="container"> 
     <div id="image-preview">
       <label for="image-upload" id="image-label">Choose File</label>
-      <input type="file" name="image" id="image-upload" accept="image/*" />
-      <img alt="" id="image"/>
+      <input type="file" ref="file" name="image" id="image-upload" data-width="500" data-height="500" @change="onFileChanged($event)" accept="image/*" />
+      <img alt="" v-if="imageSrc != null" :src=imageSrc id="image"/>
     </div>
     <div id="contents">
       <div>
-        <input type="text" placeholder="Please put the content.." name="idea">
+        <input type="text" placeholder="Please put the content.." name="idea" v-model="idea">
       </div>
       <div>
-        <input type="text" placeholder="where are you?" name="location">
+        <input type="text" placeholder="where are you?" name="location" v-model="location">
       </div>
       <div>
-        <button type="submit" class="styled-button" id="submit-button">
+        <button type="button" class="styled-button" id="submit-button" @click="onClickSubmit">
           <span>Upload</span>
         </button>
       </div>
@@ -22,8 +22,45 @@
 </template>
 
 <script>
-export default {
+import { tripWrite } from '@/api/index.js';
 
+export default {
+  data(){
+    return {
+      imageSrc: '',
+      file: '',
+      idea: '',
+      location: ''
+    }
+  },
+  methods: {
+     onFileChanged(event) {
+      const file = event.target.files[0];
+      let reader = new FileReader();
+
+      this.file = file;
+      reader.onload = (e) => {
+        this.imageSrc= e.target['result'];
+      };
+      reader.readAsDataURL(file);
+    },
+    onClickSubmit() {
+      const formData = new FormData();
+      formData.append('googleid', this.$route.query.googleid);
+      formData.append('username', this.$route.query.username);
+      formData.append('idea', this.idea);
+      formData.append('location', this.location);
+      formData.append('userfile', this.file);
+
+      tripWrite(formData)
+      .then(res => {
+        this.$router.push('list')
+      })
+      .catch(res => {
+
+      })
+    }
+  }
 }
 </script>
 

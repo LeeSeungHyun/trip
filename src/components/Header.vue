@@ -6,18 +6,22 @@
       </router-link>
     </div>
     <div class="write-trip">
-      <router-link to="/write">
-        <button class="btn" type="button">
+      <!-- <router-link to="/write"> -->
+        <button class="btn" type="button" @click="uploadContent">
           <i class="fas fa-camera"></i>
         </button>
-      </router-link>
+      <!-- </router-link> -->
     </div>
   </header>
 </template>
 
 <script>
 export default {
-  
+  methods: {
+    uploadContent() {
+      window.location.href = 'http://localhost:3000/auth/google';
+    }
+  }
 }
 </script>
 
