@@ -68,7 +68,7 @@ export default {
 #container {
   max-width: 1200px;
   margin: 20px auto;
-  padding: 40px 80px;
+  padding: 40px 40px;
   border-radius: 4px;
   background-color: #F0F0F0;
   border: 1px solid rgba(0,0,0,0.2);
@@ -81,8 +81,8 @@ export default {
 }
 
 #image-preview {
-  width: 420px;
-  height: 420px;
+  width: 360px;
+  height: 360px;
   border: 1px solid #5882FA;
   border-radius: 4px;
   position: relative;
@@ -159,7 +159,7 @@ input {
 input[type=text] {
   margin: 4px;
   padding: 0 10px;
-  width: 400px;
+  width: 430px;
   height: 36px;
   color: #5882FA;
   background: white;

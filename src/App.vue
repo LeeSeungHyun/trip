@@ -55,7 +55,7 @@ body {
   color: #262626;
   padding-bottom: 3rem;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 96.5rem;
   min-width: 320px;
   padding: 0 2rem; 
 }

@@ -54,7 +54,8 @@ export default {
   .btn {
     background-color: #fcfcfc;
     border: none;
-    padding: 8px 12px;
+    margin-top: 8px;
+    padding: 0;
     font-size: 24px;
     cursor: pointer;
   }

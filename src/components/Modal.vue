@@ -4,20 +4,23 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div>
-            <i class="fas fa-angle-left"></i>
+            <i class="fas fa-angle-left" @click="leftContent"></i>
           </div>
 
           <div>
             <div class="modal-header">
-              <slot name="header">
-              
-              </slot>
+              {{ index }}
             </div>
 
             <div class="modal-body">
-              <slot name="body">
-              
-              </slot>
+              <!-- <img :src="'http://localhost:3000/' + trip.filename" class="de-image" alt="">
+              <div class="content">
+                <div>{{ trip.idea }}</div>
+                <div>{{ trip.location }}</div>
+              </div> -->
+              <div slot="body"> 
+
+              </div>
             </div>
 
             <div class="modal-footer">
@@ -30,7 +33,7 @@
           </div>
 
           <div>
-            <i class="fas fa-angle-right"></i>
+            <i class="fas fa-angle-right" @click="rightContent"></i>
           </div>
         </div>
       </div>
@@ -40,7 +43,18 @@
 
 <script>
 export default {
-
+  props: {
+    trip: Object,
+    index: Number
+  },
+  methods: {
+    leftContent() {
+      alert("left");
+    },
+    rightContent() {
+      alert("right");
+    }
+  }
 }
 </script>
 
@@ -60,6 +74,12 @@ export default {
     flex: 1;
     align-self: center;
     margin-left: 10px;
-    font-size: 1.8rem;
+    font-size: 2rem;
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 </style>
