@@ -60,7 +60,6 @@ export default {
     rightContent() {
       this.index++;
       this.trip = this.tripLists[this.index];
-      console.log(this.trip);
     }
   },
   mounted() {
