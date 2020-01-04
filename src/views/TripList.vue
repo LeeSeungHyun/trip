@@ -3,57 +3,29 @@
     <main>
       <div class="container">
         <div class="gallery">
-          <!-- <div class="gallery-item" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt=""  v-on:click="getDetailTrip">
-            <div class="gallery-item-info">
-              <ul>
-                <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-                <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-              </ul>
-            </div>
-          </div>
-    
-          <div class="gallery-item" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop" class="gallery-image" alt="">
-            <div class="gallery-item-info">
-              <ul>
-                <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 89</li>
-                <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 5</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="gallery-item" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt="">
-            <div class="gallery-item-info">
-              <ul>
-                <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-                <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-              </ul>
-            </div>
-          </div> -->
-
           <div class="gallery-item" tabindex="0" v-for="(trip, index) in tripLists" :key=index @click="getDetailTrip(trip, index)">
             <img :src="'http://localhost:3000/' + trip.filename" class="gallery-image" alt=""/>
             <div class="gallery-item-info">
+              {{ trip.location }}
             </div>
           </div> 
         </div>
       </div>
     </main>
-
     <!-- use the modal component, pass in the prop -->
     <modal v-if="showModal" :trip="trip" :index="index" @close="showModal = false">
-      <!--
-        you can use custom content here to overwrite
-        default content
-      -->
+      <div slot="left">
+        <i v-show="index !== 0" class="fas fa-angle-left" @click="leftContent"></i>
+      </div>
       <div slot="body">
         <img :src="'http://localhost:3000/' + trip.filename" class="gallery-image" alt="">
-        <!-- <div class="content">
-          <div>{{ trip.idea }}</div>
-          <div>{{ trip.location }}</div>
-        </div> -->
+        <div class="content">
+          <div class="trip-idea">{{ trip.idea }}</div>
+          <div class="trip-user-name">{{ trip.username }}</div>
+        </div>
+      </div>
+      <div slot="right">
+        <i v-show="this.tripLists.length - 1 !== index" class="fas fa-angle-right" @click="rightContent"></i>
       </div>
     </modal>
   </div>
@@ -80,6 +52,15 @@ export default {
       this.trip = trip;
       this.index = index;
       this.showModal = true;
+    },
+    leftContent() {
+      this.index--;
+      this.trip = this.tripLists[this.index];
+    },
+    rightContent() {
+      this.index++;
+      this.trip = this.tripLists[this.index];
+      console.log(this.trip);
     }
   },
   mounted() {
@@ -109,6 +90,7 @@ export default {
     flex: 1 0 22rem;
     margin: 1rem;
     color: #fff;
+    font-size: 1.4rem;
     cursor: pointer;
   }
   .gallery-item:hover .gallery-item-info {
@@ -179,5 +161,18 @@ export default {
       width: auto;
       margin: 0;
     }
+  }
+
+  i:hover {
+    cursor: pointer;
+  }
+
+  .trip-idea {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+
+  .trip-user-name {
+    color:rgba(0, 0, 0, 0.5);
   }
 </style>

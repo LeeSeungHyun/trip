@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+let config = process.env.NODE_ENV === 'production'
+
 const api = {
-  trips: 'http://localhost:3000/desk/list',
-  write: 'http://localhost:3000/desk/upload',
+  trips: config ? '' : 'http://localhost:3000/desk/list',
+  write: config ? '' : 'http://localhost:3000/desk/upload',
 };
 
 function fetchTrips() {
