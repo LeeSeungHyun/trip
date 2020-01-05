@@ -16,10 +16,12 @@
 </template>
 
 <script>
+let config = process.env.NODE_ENV === 'production'
+
 export default {
   methods: {
     uploadContent() {
-      window.location.href = 'http://localhost:3000/auth/google';
+      window.location.href = config ? 'https://frozen-hamlet-20379.herokuapp.com/auth/google' :'http://localhost:3000/auth/google';
     }
   }
 }

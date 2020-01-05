@@ -3,8 +3,8 @@ import axios from 'axios';
 let config = process.env.NODE_ENV === 'production'
 
 const api = {
-  trips: config ? '' : 'http://localhost:3000/desk/list',
-  write: config ? '' : 'http://localhost:3000/desk/upload',
+  trips: config ? 'https://frozen-hamlet-20379.herokuapp.com/trip/list' : 'http://localhost:3000/trip/list',
+  write: config ? 'https://frozen-hamlet-20379.herokuapp.com/trip/upload' : 'http://localhost:3000/trip/upload',
 };
 
 function fetchTrips() {

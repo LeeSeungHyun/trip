@@ -4,7 +4,7 @@
       <div class="container">
         <div class="gallery">
           <div class="gallery-item" tabindex="0" v-for="(trip, index) in tripLists" :key=index @click="getDetailTrip(trip, index)">
-            <img :src="'http://localhost:3000/' + trip.filename" class="gallery-image" alt=""/>
+            <img :src="config + trip.filename" class="gallery-image" alt=""/>
             <div class="gallery-item-info">
               {{ trip.location }}
             </div>
@@ -18,7 +18,7 @@
         <i v-show="index !== 0" class="fas fa-angle-left" @click="leftContent"></i>
       </div>
       <div slot="body">
-        <img :src="'http://localhost:3000/' + trip.filename" class="gallery-image" alt="">
+        <img :src="config + trip.filename" class="gallery-image" alt="">
         <div class="content">
           <div class="trip-idea">{{ trip.idea }}</div>
           <div class="trip-user-name">{{ trip.username }}</div>
@@ -35,12 +35,15 @@
 import { fetchTrips } from '@/api/index.js';
 import modal from '@/components/Modal.vue';
 
+let config = process.env.NODE_ENV === 'production'
+
 export default {
   data() {
     return {
       showModal: false,
       tripLists: [],
       trip: {},
+      config: '',
       index: 0
     }
   },
@@ -63,9 +66,10 @@ export default {
     }
   },
   mounted() {
+    this.config = config ? 'https://frozen-hamlet-20379.herokuapp.com/' : 'http://localhost:3000/'
     fetchTrips()
     .then((res) => {
-      this.tripLists = res.data.desks;
+      this.tripLists = res.data.trips;
     })
   }
 }
